@@ -1,11 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './Header';
 import Notes from './Notes';
 import AddNote from './AddNote';
-import { FaFilter } from 'react-icons/fa';
 
 function App() {
+  const [data, setData] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
+  }, []);
+
   const [notes, setNotes] = useState([]);
 
   function addNoteItem(NewNote){
@@ -28,7 +35,7 @@ function App() {
       <Header />
       <AddNote onAdd = {addNoteItem}/>
         { notes.map((noteItem, index) => (
-          <Notes 
+          <Notes
             onDelete = {deleteNoteItem}
             key = {index}
             id = {index}
