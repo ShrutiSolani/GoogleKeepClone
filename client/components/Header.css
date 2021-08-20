@@ -1,0 +1,23 @@
+header {
+    background-color: black;
+    color: white;
+    height: 50px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:3em;
+    padding-left: 1%;
+    padding-bottom: 2%;
+    padding-top: 1.5%;
+    border-bottom: 1px solid white;
+}
+
+.logo {
+    color: orange;
+    margin-left: 5%;
+    margin-right: 1.5%;
+}
+
+
+.menu-icon {
+    color: rgba(255,255,255, 0.87 );
+
+}
