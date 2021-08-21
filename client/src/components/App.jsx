@@ -3,6 +3,7 @@ import './App.css';
 import Header from './Header';
 import Notes from './Notes';
 import AddNote from './AddNote';
+import Sidebar from './Sidebar';
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -33,16 +34,17 @@ function App() {
   return (
     <div>
       <Header />
-      <AddNote onAdd = {addNoteItem}/>
-        { notes.map((noteItem, index) => (
-          <Notes
-            onDelete = {deleteNoteItem}
-            key = {index}
-            id = {index}
-            title = {noteItem.title}
-            content = {noteItem.content}
-          />
-        ))}
+      <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'}/>
+        <AddNote onAdd = {addNoteItem}/>
+          { notes.map((noteItem, index) => (
+            <Notes
+              onDelete = {deleteNoteItem}
+              key = {index}
+              id = {index}
+              title = {noteItem.title}
+              content = {noteItem.content}
+            />
+          ))}
     </div>
   );
 }
