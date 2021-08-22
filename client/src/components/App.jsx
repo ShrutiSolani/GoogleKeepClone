@@ -4,16 +4,9 @@ import Header from './Header';
 import Notes from './Notes';
 import AddNote from './AddNote';
 import Sidebar from './Sidebar';
+import Register from './Register';
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
   const [notes, setNotes] = useState([]);
 
   function addNoteItem(NewNote){
@@ -35,6 +28,7 @@ function App() {
     <div>
       <Header />
       <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'}/>
+      <Register />
         <AddNote onAdd = {addNoteItem}/>
           { notes.map((noteItem, index) => (
             <Notes
