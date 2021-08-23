@@ -3,34 +3,51 @@ import axios from 'axios';
 import cors from 'cors';
 
 function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({
+    email: "",
+    password: ""
+  });
 
-  const reactData = {email: email, password: password};
-  const url = 'http://localhost:3001/register';
-
-  let sendData = () => {
-    axios.post(url, reactData)
-      .then(res => console.log('Data send'))
-      .catch(err => console.log(err.data))
+  const sendData = async (event) => {
+    event.preventDefault();
+    const {email, password} = userData;
+    console.log(email, password);
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,password
+      })
+    });
+    console.log("After fetch");
+    const res1 = await res.json();
+    console.log("res.json()");
+    window.alert("Registered");
   }
 
-
-  function emailChange(event){
-    const val = event.target.value;
-    setEmail(val);
+  const handleChange = (event) => {
+    const {name, value} = event.target;
+    setUserData({...userData, [name]: value});
   }
 
-  function passwordChange(event){
-    const val = event.target.value;
-    setPassword(val);
-  }
 
   return <div >
-      <input type = "text" placeholder = "email" name = "email" value = {email} onChange = {emailChange} />
-      <input type = "password" placeholder = "placeholder" name = "password" value={password} onChange = {passwordChange}/>
+  <form method="POST">
+      <input type = "text"
+      placeholder = "email"
+      name = "email"
+      value = {userData.email}
+      onChange = {handleChange} />
+      <input type = "password"
+      placeholder = "placeholder"
+      name = "password"
+      value={userData.password}
+      onChange = {handleChange}/>
       <button onClick = {sendData}>Submit</button>
-    </div>
+    </form>
+  </div>
 }
 
 export default Register;
